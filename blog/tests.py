@@ -16,7 +16,6 @@ class BlogPostTest(TestCase):
         entry.save()
         self.assertEqual(Entry.objects.published().count(), 1)
         
-
 class BlogViewTests(TestCase):
     def test_feed_url(self):
         response = self.client.get('/feed/')

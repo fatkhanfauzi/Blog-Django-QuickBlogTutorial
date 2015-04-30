@@ -32,3 +32,24 @@ class Entry(models.Model):
         verbose_name = "Blog Entry"
         verbose_name_plural = "Blog Entries"
         ordering = ["-created"]
+
+class CommentQuerySet(models.QuerySet):
+    def sort_asc_by_created(self, direction):
+        if direction == True:
+            return self.objects.order_by('-created')
+        else:
+            return self.objects.order_by('created')
+       
+class Comment(models.Model):
+    entry = models.ForeignKey(Entry)
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=100)
+    comment = RichTextField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    
+    objects = CommentQuerySet.as_manager()
+    
+    def __str_(self):
+        return self.comment
+    
