@@ -6,5 +6,6 @@ class BlogIndex(generic.ListView):
     template_name = 'blog/home.html'
     paginate_by = 2
     
-
-
+class BlogDetail(generic.DetailView):
+    model = models.Entry
+    template_name = 'blog/post.html'

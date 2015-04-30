@@ -7,6 +7,6 @@
       {{ object.created }} |
       Tagged under {{  object.tags.all|join:", " }}
     </p>
-    {{ object.body|markdown }}
+    {{ object.body|safe }}
   </div>
 {% endblock %}

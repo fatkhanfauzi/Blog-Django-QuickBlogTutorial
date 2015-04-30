@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.core.urlresolvers import reverse
 
 class Tag(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
@@ -20,7 +21,10 @@ class Entry(models.Model):
     tags = models.ManyToManyField(Tag)
     
     objects = EntryQuerySet.as_manager()
-    
+
+    def get_absolute_url(self):
+        return reverse("entry_detail", kwargs={"slug": self.slug})
+        
     def __str__(self):
         return self.title
     
@@ -28,4 +32,3 @@ class Entry(models.Model):
         verbose_name = "Blog Entry"
         verbose_name_plural = "Blog Entries"
         ordering = ["-created"]
-         
