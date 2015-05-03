@@ -50,6 +50,6 @@ class Comment(models.Model):
     
     objects = CommentQuerySet.as_manager()
     
-    def __str_(self):
+    def __str__(self):
         return self.comment
     
